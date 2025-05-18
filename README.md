@@ -91,6 +91,7 @@ GOOGLE_REDIRECT_URI=http://localhost:8000/auth/callback/google
 ```
 
 🛠️ Fitur Aplikasi
+
 👤 Admin Panel
 
 1. CRUD Room (Kamar Hotel)
