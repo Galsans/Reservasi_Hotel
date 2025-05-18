@@ -1,66 +1,126 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Laravel Project Installation Guide
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Panduan ini akan membantu kamu men-setup dan menjalankan proyek Laravel secara lokal.
 
-## About Laravel
+## 📋 Prasyarat
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sebelum memulai, pastikan kamu sudah menginstall:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   PHP >= 8.1
+-   Composer
+-   MySQL / MariaDB
+-   Git
+-   Laravel CLI (opsional)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+> 💡 Gunakan [Laragon](https://laragon.org/) atau [XAMPP](https://www.apachefriends.org/index.html) jika kamu butuh development environment cepat di Windows.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📦 1. Clone Repository
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```
+https://github.com/Galsans/Reservasi_Hotel
+cd Reservasi_Hotel
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ⚙️ 2. Install Dependency PHP
 
-## Laravel Sponsors
+```
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```
 
-### Premium Partners
+## 🔑 3. Salin File .env
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+cp .env.example .env
+# atau (Windows)
+copy .env.example .env
 
-## Contributing
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🔐 4. Generate App Key & Storage
 
-## Code of Conduct
+```
+php artisan key:generate
+php artisan Storage:link
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
 
-## Security Vulnerabilities
+## 🗄️ 5. Jalankan Migrasi dan Seeder
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+php artisan migrate --seed
 
-## License
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🏃 6. Jalankan Server Lokal
+
+```
+php artisan serve
+
+```
+
+## 🧩 7. Konfigurasi Google OAuth (Autentikasi)
+
+Untuk mengaktifkan login menggunakan Google, kamu perlu:
+
+1. Buka Google Developer Console
+
+2. Buat project baru → Aktifkan "OAuth 2.0 Client IDs"
+
+3. Masukkan URL Redirect seperti:
+
+```
+http://localhost:8000/auth/callback/google
+
+```
+
+4. Setelah client dibuat, kamu akan mendapatkan:
+
+-   GOOGLE_CLIENT_ID
+
+-   GOOGLE_CLIENT_SECRET
+
+5. Tambahkan ke file .env:
+
+```
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+GOOGLE_REDIRECT_URI=http://localhost:8000/auth/callback/google
+```
+
+🛠️ Fitur Aplikasi
+👤 Admin Panel
+
+1. CRUD Room (Kamar Hotel)
+   Tambah, ubah, dan hapus data kamar yang tersedia untuk reservasi.
+
+2. CRUD Reservation
+   Kelola seluruh data reservasi dari semua user.
+
+3. Laporan Pendapatan
+   Menampilkan total pendapatan yang didapat dari reservasi.
+
+4. Kamar Populer
+   Statistik kamar yang paling banyak dipesan oleh pengguna.
+
+5. Autentikasi via Google
+   Login menggunakan akun Google untuk admin dengan keamanan berbasis token.
+
+🙋 User Panel
+
+1. Reservasi Hotel Pribadi
+   User dapat melakukan pemesanan kamar hotel.
+
+2. Hapus Reservasi
+   Pengguna dapat membatalkan reservasi yang sudah dilakukan.
+
+3. Edit Reservasi
+   Pengguna dapat mengedit reservasi yang sudah dilakukan.
+
+4. Generate PDF Konfirmasi
+   Setelah melakukan reservasi, user dapat mendownload file PDF sebagai bukti dan mengirimkannya ke pihak admin hotel.
+
+5. Autentikasi via Google
+   Login menggunakan akun Google untuk user dengan keamanan berbasis token.
